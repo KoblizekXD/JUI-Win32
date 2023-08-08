@@ -1,5 +1,6 @@
 plugins {
     id("java")
+    `maven-publish`
 }
 
 group = "lol.koblizek"
@@ -16,4 +17,25 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
+}
+
+publishing {
+    publications.create<MavenPublication>("maven") {
+        repositories.maven {
+            url = uri("https://repo.jopga.me/releases")
+
+            credentials(PasswordCredentials::class)
+            authentication {
+                create<BasicAuthentication>("basic")
+            }
+        }
+
+        groupId = rootProject.group as String
+        artifactId = project.name
+        version = rootProject.version as String
+
+        pom {
+            name.set("JUI-Win32")
+        }
+    }
 }

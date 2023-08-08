@@ -7,6 +7,7 @@ It is generally not recommended to use them alone, but if you want, I won't
 be stopping you. They're mainly used for JUI, so you might find some roadblocks.  
 - There will be probably downloadable JAR in releases  
 - Maybe I'll put it on JitPack, we'll see about that  
+- since 8.8.2023 bindings are available on [JopGamer's repository](https://repo.jopga.me/#/)
 
 ### Contributing  
 There are no contributions required nor needed. 
