@@ -1,6 +1,7 @@
 plugins {
     id("java")
     `maven-publish`
+    `java-library`
 }
 
 group = "lol.koblizek"
@@ -15,8 +16,21 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter")
 }
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(20))
+    }
+}
+
 tasks.test {
     useJUnitPlatform()
+}
+
+tasks {
+    val ENABLE_PREVIEW = "--enable-preview"
+    withType<JavaCompile> {
+        options.compilerArgs.add(ENABLE_PREVIEW)
+    }
 }
 
 publishing {
@@ -29,13 +43,9 @@ publishing {
                 create<BasicAuthentication>("basic")
             }
         }
-
-        groupId = rootProject.group as String
+        groupId = "lol.koblizek"
         artifactId = project.name
-        version = rootProject.version as String
-
-        pom {
-            name.set("JUI-Win32")
-        }
+        version = project.version as String
+        from(components["java"])
     }
 }
